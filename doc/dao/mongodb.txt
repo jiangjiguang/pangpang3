@@ -1,0 +1,101 @@
+1. win下启动mongodb
+mongod --dbpath d:\mongodb\data
+
+2. win下作为Windows服务运行
+mongod --bind_ip  10.32.11.11 --logpath "D:\mongodb\log\mongodb.log" --logappend --dbpath "D:\mongodb\data" --port 27017 --serviceName "myMongoDBService" --serviceDisplayName "myMongoDBService" --install
+
+3. win下启动服务
+net start myMongoDBService
+
+4. 连接服务:
+mongo mongodb://10.32.11.11:27017
+
+5. mongodb官网
+https://www.mongodb.com/
+
+6. 常用命令
+    show dbs
+    db //显示当前数据库
+    use dbname  //连接到另一个数据库
+    db.dropDatabase()  //删除数据库
+    db.collection.drop()  //删除集合
+    db.col.find()   //查看文档
+    db.col.save(document)  //插入文档  有更新的功能  根据 _id
+    db.col.insert(document)  //仅仅插入文档
+7. 插入文档
+    db.col.insert({title: 'MongoDB 教程',
+        description: 'MongoDB 是一个 Nosql 数据库',
+        by: '菜鸟教程',
+        url: 'http://www.runoob.com',
+        tags: ['mongodb', 'database', 'NoSQL'],
+        likes: 100
+    })
+8. 更新文档
+    使用 update() 和 save() 方法来更新集合中的文档
+    db.collection.update(
+       <query>,
+       <update>,
+       {
+         upsert: <boolean>,
+         multi: <boolean>,
+         writeConcern: <document>
+       }
+    )
+    query : update的查询条件，类似sql update查询内where后面的。
+    update : update的对象和一些更新的操作符（如$,$inc...）等，也可以理解为sql update查询内set后面的
+    upsert : 可选，这个参数的意思是，如果不存在update的记录，是否插入objNew,true为插入，默认是false，不插入。
+    multi : 可选，mongodb 默认是false,只更新找到的第一条记录，如果这个参数为true,就把按条件查出来多条记录全部更新。
+    writeConcern :可选，抛出异常的级别。
+
+    db.col.update({'title':'MongoDB 教程'},{$set:{'title':'MongoDB'}})
+
+    save() 方法通过传入的文档来替换已有文档。语法格式如下：
+
+9. 删除文档
+    db.collection.remove(
+       <query>,
+       {
+         justOne: <boolean>,
+         writeConcern: <document>
+       }
+    )
+    db.col.remove({'title':'MongoDB 教程'})
+
+10. 查询文档
+    db.COLLECTION_NAME.find()
+    db.col.find().pretty()     //以易读的方式来读取数据
+
+    等于 	      {<key>:<value>} 	        db.col.find({"by":"菜鸟教程"}).pretty() 	where by = '菜鸟教程'
+    小于 	      {<key>:{$lt:<value>}} 	db.col.find({"likes":{$lt:50}}).pretty() 	where likes < 50
+    小于或等于 	  {<key>:{$lte:<value>}} 	db.col.find({"likes":{$lte:50}}).pretty() 	where likes <= 50
+    大于 	      {<key>:{$gt:<value>}} 	db.col.find({"likes":{$gt:50}}).pretty() 	where likes > 50
+    大于或等于 	  {<key>:{$gte:<value>}} 	db.col.find({"likes":{$gte:50}}).pretty() 	where likes >= 50
+    不等于 	      {<key>:{$ne:<value>}} 	db.col.find({"likes":{$ne:50}}).pretty() 	where likes != 50
+
+    db.col.find({"by":"菜鸟教程", "title":"MongoDB 教程"}).pretty()  //and  条件
+    db.col.find({$or:[{"by":"菜鸟教程"},{"title": "MongoDB 教程"}]}).pretty()  //or 条件
+    db.col.find({"likes": {$gt:50}, $or: [{"by": "菜鸟教程"},{"title": "MongoDB 教程"}]}).pretty()  //联合使用
+    db.col.find({"likes" : {$gt : 100}})
+    db.col.find({likes : {$lt :200, $gt : 100}})
+11. $type 操作符
+    $type操作符是基于BSON类型来检索集合中匹配的数据类型，并返回结果。
+    如果想获取 "col" 集合中 title 为 String 的数据，你可以使用以下命令：
+    db.col.find({"title" : {$type : 2}})
+12. Limit() 方法
+    db.col.find({},{"title":1,_id:0}).limit(2)
+13. Skip() 方法
+    db.col.find({},{"title":1,_id:0}).limit(1).skip(1)
+14. sort()方法
+    db.COLLECTION_NAME.find().sort({KEY:1})   //其中 1 为升序排列，而-1是用于降序排列
+    db.col.find({},{"title":1,_id:0}).sort({"likes":-1})
+
+15. 索引
+    索引是对数据库表中一列或多列的值进行排序的一种结构
+    MongoDB使用 ensureIndex() 方法来创建索引: db.COLLECTION_NAME.ensureIndex({KEY:1})
+    db.col.ensureIndex({"title":1})
+    db.col.ensureIndex({"title":1,"description":-1})
+16. 聚合
+    aggregate() 方法的基本语法格式如下所示：db.COLLECTION_NAME.aggregate(AGGREGATE_OPERATION)
+    db.mycol.aggregate([{$group : {_id : "$by_user", num_tutorial : {$sum : 1}}}])
+    db.mycol.aggregate([{$group : {_id : "$by_user", num_tutorial : {$sum : "$likes"}}}])
+17. 管道的概念

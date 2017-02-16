@@ -15,5 +15,72 @@
         <module>webvelocity</module>
     </modules>
 
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <spring.version>4.2.4.RELEASE</spring.version>
+        <jackson.version>2.6.4</jackson.version>
+        <slf4j.version>1.7.7</slf4j.version>
+        <httpclient.version>4.3.2</httpclient.version>
+        <zookeeper.version>3.4.6</zookeeper.version>
+        <hbase.version>0.94.15-cdh4.6.0</hbase.version>
+        <hadoop.version>2.0.0-cdh4.6.0</hadoop.version>
+        <ruleengine.bundle.version>1.1.1</ruleengine.bundle.version>
+        <dalclient.version>1.0.1.6</dalclient.version>
+        <mongo-java-driver>3.2.0</mongo-java-driver>
+        <spring-data-mongodb>3.2.0</spring-data-mongodb>
+    </properties>
 
+    <dependencyManagement>
+        <dependencies>
+            <!-- Mongodb -->
+            <dependency>
+                <groupId>org.mongodb</groupId>
+                <artifactId>mongo-java-driver</artifactId>
+                <version>${mongo-java-driver}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-mongodb</artifactId>
+                <version>${spring-data-mongodb}</version>
+            </dependency>
+        </dependencies>
+
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.1</version>
+                    <configuration>
+                        <source>1.7</source>
+                        <target>1.7</target>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>2.5</version>
+                    <configuration>
+                        <encoding>${project.build.sourceEncoding}</encoding>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>sonar-maven-plugin</artifactId>
+                    <version>1.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <configuration>
+                        <skip>true</skip>
+                    </configuration>
+                </plugin>
+
+            </plugins>
+        </pluginManagement>
+    </build>
 </project>
