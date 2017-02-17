@@ -13,6 +13,8 @@
         <module>utils</module>
         <module>webjsp</module>
         <module>webvelocity</module>
+        <module>crawler</module>
+        <module>drools</module>
     </modules>
 
     <properties>
@@ -31,6 +33,7 @@
         <guava>19.0</guava>
         <commons.lang3>3.4</commons.lang3>
         <commons.lang>2.4</commons.lang>
+        <commons.io>2.5</commons.io>
         <org.apache.httpcomponents>4.5.1</org.apache.httpcomponents>
     </properties>
 
@@ -76,6 +79,11 @@
                 <artifactId>commons-lang</artifactId>
                 <groupId>commons-lang</groupId>
                 <version>${commons.lang}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons.io}</version>
             </dependency>
         </dependencies>
 
