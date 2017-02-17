@@ -26,8 +26,12 @@
         <hadoop.version>2.0.0-cdh4.6.0</hadoop.version>
         <ruleengine.bundle.version>1.1.1</ruleengine.bundle.version>
         <dalclient.version>1.0.1.6</dalclient.version>
-        <mongo-java-driver>3.2.0</mongo-java-driver>
-        <spring-data-mongodb>3.2.0</spring-data-mongodb>
+        <mongo.java.driver>3.2.0</mongo.java.driver>
+        <spring.data.mongodb>3.2.0</spring.data.mongodb>
+        <guava>19.0</guava>
+        <commons.lang3>3.4</commons.lang3>
+        <commons.lang>2.4</commons.lang>
+        <org.apache.httpcomponents>4.5.1</org.apache.httpcomponents>
     </properties>
 
     <dependencyManagement>
@@ -36,12 +40,42 @@
             <dependency>
                 <groupId>org.mongodb</groupId>
                 <artifactId>mongo-java-driver</artifactId>
-                <version>${mongo-java-driver}</version>
+                <version>${mongo.java.driver}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.data</groupId>
                 <artifactId>spring-data-mongodb</artifactId>
-                <version>${spring-data-mongodb}</version>
+                <version>${spring.data.mongodb}</version>
+            </dependency>
+
+            <!-- google guava -->
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>${org.apache.httpcomponents}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>fluent-hc</artifactId>
+                <version>${org.apache.httpcomponents}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons.lang3}</version>
+            </dependency>
+            <dependency>
+                <artifactId>commons-lang</artifactId>
+                <groupId>commons-lang</groupId>
+                <version>${commons.lang}</version>
             </dependency>
         </dependencies>
 
