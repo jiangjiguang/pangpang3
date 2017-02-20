@@ -9,9 +9,11 @@ import org.apache.http.client.fluent.Request;
 import org.apache.http.client.fluent.Response;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -33,14 +35,13 @@ public class HttpClientUtils {
             return new HttpClientResult(503, ExceptionUtils.getStackTrace(ex));
         }
     }
-    public static HttpClientResult execPostMethod(String url, List<NameValuePair> params) {
+    public static HttpClientResult executeForm(String url, List<NameValuePair> params) {
         try {
-            StatusLine status = Request.Post(url).bodyForm(params, Charset.forName("UTF-8"))
+            StatusLine status = Request.Post(url)
+                    .bodyForm(params, Charset.forName("UTF-8"))
                     .connectTimeout(5000)
                     .socketTimeout(10000)
                     .execute().returnResponse().getStatusLine();
-
-            //
             if (status.getStatusCode() != 200) {
                 return new HttpClientResult(status.getStatusCode(), status.getReasonPhrase());
             } else {
@@ -51,10 +52,14 @@ public class HttpClientUtils {
         }
     }
 
-    public static HttpClientResult execute(String url, String content){
+    public static HttpClientResult executePost(String url, String content){
         try {
             HttpEntity httpEntity = new StringEntity(content, ContentType.create("application/json", "UTF-8"));
-            Response response = Request.Post(url).connectTimeout(5000).socketTimeout(10000).body(httpEntity).execute();
+            Response response = Request.Post(url)
+                    .connectTimeout(5000)
+                    .socketTimeout(10000)
+                    .body(httpEntity)
+                    .execute();
             HttpResponse httpResponse = response.returnResponse();
             StatusLine status = httpResponse.getStatusLine();
             HttpEntity httpEntityResponse = httpResponse.getEntity();
