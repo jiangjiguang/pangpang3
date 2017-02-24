@@ -11,7 +11,9 @@ import java.util.zip.GZIPOutputStream;
  */
 public class GzipUtils {
     public static void main(String[] args) throws IOException {
-
+        String param = "[{\"name\":\"variable_CID_AMT_STD_ALL\",\"day\":\"2017-02-22\",\"type\":\"table\",\"callerList\":[\"C0\",\"C1\",\"C2\"],\"count\":488},{\"name\":\"hdfhd\",\"day\":\"2017-02-22\",\"type\":\"variable\",\"callerList\":[\"C0\",\"C1\",\"C2\"],\"count\":512}] ";
+        System.out.println(compressToBase64Data(param));
+        System.out.println(decompressFromBase64Data(compressToBase64Data(param)));
     }
     public static String compressToBase64Data(String data) throws IOException {
         byte[] binaryData = compress(data);

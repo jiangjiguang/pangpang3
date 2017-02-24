@@ -1,5 +1,6 @@
 package com.pangpang3.utils.client;
 
+import com.pangpang3.utils.unzip.GzipUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -12,6 +13,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
+import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +22,12 @@ import java.util.List;
  * Created by jiangjg on 2017/2/17.
  */
 public class HttpClientUtils {
-    public static void main(String[] args) {
-
+    public static void main(String[] args) throws IOException {
+        String url = "http://localhost:8080/rest/monitor/variableuse-save";
+        String param = "[{\"name\":\"variable_CID_AMT_STD_ALL\",\"day\":\"2017-02-20\",\"type\":\"table\",\"callerList\":[\"C0\",\"C1\",\"C2\"],\"count\":1},{\"name\":\"hdfhd\",\"day\":\"2017-02-22\",\"type\":\"variable\",\"callerList\":[\"C0\",\"C1\",\"C2\"],\"count\":512}] ";
+        List<NameValuePair> list = new ArrayList<>();
+        list.add(new BasicNameValuePair("data", GzipUtils.compressToBase64Data(param)));
+        executeForm(url, list);
     }
     public static HttpClientResult executeGet(String url){
         try {
