@@ -15,9 +15,7 @@ net start myMongoDBService
 mongod -f /opt/mongodb/mongodb.conf
 
 
-
-
-
+robomongo &
 
 4. 连接服务:
 mongo mongodb://10.32.11.11:27017

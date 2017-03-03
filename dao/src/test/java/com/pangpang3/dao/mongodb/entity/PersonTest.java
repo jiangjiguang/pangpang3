@@ -17,6 +17,8 @@ public class PersonTest {
     private MongoTemplate mongoTemplate;
     @Test
    public  void test(){
-        System.out.println(mongoTemplate);
+        Person person = new Person();
+        person.setFirstName("jiangjg");
+        mongoTemplate.insert(person);
     }
 }
