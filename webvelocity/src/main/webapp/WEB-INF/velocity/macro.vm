@@ -1,0 +1,4 @@
+#macro(message $message $messagetype)
+    #if($message)
+    #end
+#end'

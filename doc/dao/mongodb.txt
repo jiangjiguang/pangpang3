@@ -1,11 +1,21 @@
 1. win下启动mongodb
 mongod --dbpath d:\mongodb\data
 
+
+mongod --dbpath \data
+
 2. win下作为Windows服务运行
 mongod --bind_ip  10.32.11.11 --logpath "D:\mongodb\log\mongodb.log" --logappend --dbpath "D:\mongodb\data" --port 27017 --serviceName "myMongoDBService" --serviceDisplayName "myMongoDBService" --install
 
+mongod --bind_ip  192.168.0.102 --logpath "\opt\mongodb\log\mongodb.log" --logappend --dbpath "\opt\mongodb\data" --port 27017 --serviceName "myMongoDBService" --serviceDisplayName "myMongoDBService" --install
+
 3. win下启动服务
 net start myMongoDBService
+
+mongod -f /opt/mongodb/mongodb.conf
+
+
+robomongo &
 
 4. 连接服务:
 mongo mongodb://10.32.11.11:27017
