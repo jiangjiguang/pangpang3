@@ -9,13 +9,22 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>webvelocity</artifactId>
+    <artifactId>model</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>pangpang3</groupId>
-            <artifactId>model</artifactId>
+            <artifactId>dao</artifactId>
         </dependency>
+        <dependency>
+            <groupId>pangpang3</groupId>
+            <artifactId>utils</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>pangpang3</groupId>
+            <artifactId>drools</artifactId>
+        </dependency>
+
         <!-- spring -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -81,7 +90,5 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
         </dependency>
-
     </dependencies>
-
 </project>
