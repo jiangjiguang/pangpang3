@@ -11,11 +11,10 @@
     <modules>
         <module>dao</module>
         <module>utils</module>
-        <module>webjsp</module>
-        <module>webvelocity</module>
         <module>crawler</module>
         <module>drools</module>
         <module>model</module>
+        <module>webvelocity2</module>
     </modules>
 
     <properties>
